@@ -71,6 +71,9 @@ export default class TicketService {
     if (counts.ADULT === 0 && (counts.CHILD > 0 || counts.INFANT > 0)) {
       throw new InvalidPurchaseException('Child and Infant tickets require at least one Adult ticket');
     }
+    if (counts.INFANT > counts.ADULT) {
+        throw new InvalidPurchaseException('Cannot have more Infant tickets than Adult tickets');
+    }
   }
 
   #calculateTotalAmount(counts) {
